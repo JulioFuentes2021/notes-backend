@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import dotenv from 'dotenv';
+import routerApi from './routes/index';
 
 dotenv.config();
 
@@ -25,6 +26,8 @@ mongoose.connect(process.env.DB_CONNECTION as string, options)
     .catch((err:string) => {
         console.log('Error connecting to database ' + err);
     });
+
+routerApi(app);
 
 app.listen(port, () => {
     console.log(`[server]: Server is running at https://localhost:${port}`);
